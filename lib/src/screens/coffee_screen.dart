@@ -18,7 +18,7 @@ class CoffeeScreen extends StatefulWidget {
 class CoffeeScreenState extends State<CoffeeScreen> {
   Coffee? coffee;
 
-  bool notFound = false;
+  bool hasData = true;
 
   @override
   void initState() {
@@ -27,7 +27,7 @@ class CoffeeScreenState extends State<CoffeeScreen> {
           coffeeMenu.singleWhere((element) => element.id == widget.idParam);
     } catch (e) {
       if (e is StateError) {
-        notFound = true;
+        hasData = false;
       }
     }
 
@@ -46,7 +46,7 @@ class CoffeeScreenState extends State<CoffeeScreen> {
           ),
         ],
       ),
-      body: !notFound
+      body: hasData
           ? Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
@@ -86,7 +86,7 @@ class CoffeeScreenState extends State<CoffeeScreen> {
           : const Center(
               child: Text('Not Found'),
             ),
-      bottomNavigationBar: !notFound
+      bottomNavigationBar: hasData
           ? Padding(
               padding: const EdgeInsets.all(8.0),
               child: FilledButton.icon(
